@@ -1,6 +1,6 @@
 import pytest
 
-from src.pytemplate.domain.models import Operands
+from src.pytemplate.domain.models import Operands, operands_factory
 
 
 def test_operands_initialization():
@@ -19,3 +19,16 @@ def test_operands_equality():
     op1 = Operands(3, 4)
     op2 = Operands(3, 4)
     assert op1 == op2
+
+
+def test_operands_factory_creates_operands():
+    result = operands_factory(5, 10)
+    assert isinstance(result, Operands)
+    assert result.first_operand == 5
+    assert result.second_operand == 10
+
+
+def test_operands_factory_with_negative_values():
+    result = operands_factory(-3, -7)
+    assert result.first_operand == -3
+    assert result.second_operand == -7
